@@ -9,6 +9,9 @@ class PopUp:
     confirm_password_field = '#confirmpassword'
     save_button = '#modal-save-button'
     user_exists_error_massage = "//span[text()='Already exists']"
+    filter_user = "a[class='tooltipped action-icon']"
+    filter_set_username = '#systemuser_uname_filter'
+
 
     def __init__(self, step: StepHelper, wd: WebDriver):
         self.step = step
@@ -31,3 +34,10 @@ class PopUp:
 
     def get_user_exist_error(self):
         return self.step.get_element_text(self.user_exists_error_massage)
+
+    def click_on_filter_user(self):
+        self.step.click_on_element(self.filter_user)
+
+    def filter_type_username(self, text):
+        self.step.input_text(self.filter_set_username, text)
+

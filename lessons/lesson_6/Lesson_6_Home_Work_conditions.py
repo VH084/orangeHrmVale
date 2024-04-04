@@ -8,7 +8,30 @@ Open the web application in a browser.
 Log into the application with provided credentials.
 From the side menu, navigate to the "HR Administration" section.
 Click on the "Add User" button.
-Locate the user status option on the "Add User" form.
+Locate the user status option on the "Add User" form. //div[@data-tooltip='Add User']
 Check the current status of the user. If it is not "Disabled," you need to select the "Disabled" option.
 Ensure your script can handle both conditions: if the status is already "Disabled," it remains unchanged; otherwise, change it to "Disabled."
 '''
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+driver = webdriver.Chrome()
+driver.get("https://portnov_administrator-trials712.orangehrmlive.com/client/#/dashboard")
+
+driver.find_element(By.CSS_SELECTOR, "input[id='txtUsername']").send_keys("Admin")
+driver.find_element(By.CSS_SELECTOR, "input[id='txtPassword']").send_keys("NDb2O@5kyF")
+driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+
+time.sleep(5)
+driver.find_element(By.CSS_SELECTOR, '#left_menu_item_10').click()
+time.sleep(15)
+driver.find_element(By.XPATH, "//div[@data-tooltip='Add User']").click()
+time.sleep(5)
+
+for item in buttons:
+    if #Disabled active
+        #click none
+    else #Disabled inactive
+        #click 'Disabled'
