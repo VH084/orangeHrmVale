@@ -8,7 +8,7 @@ Open the web application in a browser.
 Log into the application with provided credentials.
 From the side menu, navigate to the "HR Administration" section.
 Click on the "Add User" button.
-Locate the user status option on the "Add User" form. //div[@data-tooltip='Add User']
+Locate the user status option on the "Add User" form.
 Check the current status of the user. If it is not "Disabled," you need to select the "Disabled" option.
 Ensure your script can handle both conditions: if the status is already "Disabled," it remains unchanged; otherwise, change it to "Disabled."
 '''
@@ -16,6 +16,8 @@ Ensure your script can handle both conditions: if the status is already "Disable
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
+
+from selenium.webdriver.remote.webelement import WebElement
 
 driver = webdriver.Chrome()
 driver.get("https://portnov_administrator-trials712.orangehrmlive.com/client/#/dashboard")
@@ -30,8 +32,8 @@ time.sleep(15)
 driver.find_element(By.XPATH, "//div[@data-tooltip='Add User']").click()
 time.sleep(5)
 
-for item in buttons:
-    if #Disabled active
-        #click none
-    else #Disabled inactive
-        #click 'Disabled'
+disabled_radio_button = driver.find_element(By.XPATH, "//label[@for='status_0']")
+print(disabled_radio_button.is_selected())
+disabled_radio_button.click()
+
+time.sleep(10)
