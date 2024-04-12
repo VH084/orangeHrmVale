@@ -9,6 +9,18 @@
 # 5. Start typing a known employee name in the 'Employee Name' field.
 # Expected Result:
 # As the user types, an autocomplete dropdown should appear with employee name suggestions.
+import time
+
+
+def test_case_7_verify_employee_name_autocomplete_suggestion(app):
+ app.orangeHrm.openUrl()
+ app.orangeHrm.login_to_the_application()
+ app.orangeHrm.sideMenu.click_on_side_menu_button('HR Administration')
+ app.orangeHrm.hrAdministration.click_on_filter()
+ app.orangeHrm.popUp.set_employee_name('Mazie')
+ app.assert_that(app.orangeHrm.popUp.get_autocomplete_name_text()).contains('Mazie Abraham')
+
+
 
 # -----------------------------------------------------------------------------------
 
@@ -21,9 +33,18 @@
 # 3. Navigate to the 'HR Administration' section from the left menu.
 # 4. Click on the 'Filter Users' button.
 # 5. Enter a non-existing employee name in the 'Employee Name' field.
-# Expected Result:
+# Expected Result: div[ng-bind="textNoResults"]
 # A message indicating 'no results found' should appear if no employee names match the entered value.
 
+def test_case_7_1_verify_no_results_found_message(app):
+ app.orangeHrm.openUrl()
+ app.orangeHrm.login_to_the_application()
+ app.orangeHrm.sideMenu.click_on_side_menu_button('HR Administration')
+ app.orangeHrm.hrAdministration.click_on_filter()
+ app.orangeHrm.popUp.set_employee_name('valeria')
+ time.sleep(5)
+ app.assert_that(app.orangeHrm.popUp.get_no_results_message()).is_equal_to('No results found')
+ time.sleep(5)
 # -----------------------------------------------------------------------------------
 
 # Test Case 7_2: Verify Dropdown Default Values
@@ -39,6 +60,15 @@
 # Expected Result:
 # All dropdowns in the 'Filter Users' pop-up should display their default values.
 
+def test_case_7_2_verify_dropdown_default_values(app):
+ app.orangeHrm.openUrl()
+ app.orangeHrm.login_to_the_application()
+ app.orangeHrm.sideMenu.click_on_side_menu_button('HR Administration')
+ app.orangeHrm.hrAdministration.click_on_filter()
+ app.orangeHrm.popUp.ess_role_field_open()
+ app.assert_that(app.orangeHrm.popUp.get_ess_role_list()).is_equal_to('All', 'Default ESS')
+ app.orangeHrm.popUp.admin_role_field_open()
+ app.assert_that(app.orangeHrm.popUp.get_admin_role_list()).is_equal_to('All', 'Global Admin', 'Regional HR Admin', 'Leave Admin', 'Report Admin')
 # -----------------------------------------------------------------------------------
 
 # Test Case 7_3: Verify Reset Button Functionality

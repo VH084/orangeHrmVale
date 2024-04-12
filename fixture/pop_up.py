@@ -4,7 +4,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 class PopUp:
     user_name_field = '#systemuser_uname_filter'
-    employee_name_field = '#selectedEmployee_value'
+    employee_name_field = '#employee_name_filter_value'
     password_field = '#password'
     confirm_password_field = '#confirmpassword'
     save_button = '#modal-save-button'
@@ -17,6 +17,15 @@ class PopUp:
     pass_length_message = '//input[@id="password"]/following::span[text()="Your password should have at least 8 characters."]'
     pass_strength_message = '.password-strength-check'
     empty_space = '.password-help-text-container small'
+    autocomplete_names = '#employee_name_filter_dropdown'
+    no_results_message = 'div[ng-bind="textNoResults"]'
+    searching_text = '//div[@id="employee_name_filter_dropdown"]/div[text()="Searching..."]'
+
+    ess_role_field = '#essroles_inputfileddiv'
+    ess_role_field_list = '#essroles_inputfileddiv li'
+    admin_role_field = '#adminroles_inputfileddiv'
+    admin_role_field_list = '#adminroles_inputfileddiv li'
+
 
     def __init__(self, step: StepHelper, wd: WebDriver):
         self.step = step
@@ -53,3 +62,22 @@ class PopUp:
 
     def get_confirm_password_error(self):
         return self.step.get_element_text(self.confirm_password_error_massage)
+
+    def get_autocomplete_name_text(self):
+        self.step.specified_element_is_not_present(self.searching_text, 6)
+        return self.step.get_element_text(self.autocomplete_names)
+
+    def get_no_results_message(self):
+        return self.step.get_element_text(self.no_results_message)
+
+    def ess_role_field_open(self):
+        return self.step.click_on_element(self.ess_role_field)
+
+    def get_ess_role_list(self):
+        return self.step.get_element_text(self.ess_role_field_list)
+
+    def admin_role_field_open(self):
+        return self.step.click_on_element(self.admin_role_field)
+
+    def get_admin_role_list(self):
+        return self.step.get_element_text(self.ess_role_field_list)

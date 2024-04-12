@@ -19,14 +19,16 @@ import time
 
 from selenium.webdriver.remote.webelement import WebElement
 
+
+
 driver = webdriver.Chrome()
-driver.get("https://portnov_administrator-trials712.orangehrmlive.com/client/#/dashboard")
+driver.get("https://portnov_administrator-trials712.orangehrmlive.com")
 
 driver.find_element(By.CSS_SELECTOR, "input[id='txtUsername']").send_keys("Admin")
 driver.find_element(By.CSS_SELECTOR, "input[id='txtPassword']").send_keys("NDb2O@5kyF")
 driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
 
-time.sleep(5)
+time.sleep(10)
 driver.find_element(By.CSS_SELECTOR, '#left_menu_item_10').click()
 time.sleep(15)
 driver.find_element(By.XPATH, "//div[@data-tooltip='Add User']").click()
@@ -35,5 +37,13 @@ time.sleep(5)
 disabled_radio_button = driver.find_element(By.XPATH, "//label[@for='status_0']")
 print(disabled_radio_button.is_selected())
 disabled_radio_button.click()
+
+time.sleep(10)
+
+disabled_radio_button = driver.find_element(By.XPATH, "//label[@for='status_0']")
+for items in disabled_radio_button:
+    attribute_value = item.get_attribute('class')
+if 'selected option' in attribute_value:
+    disabled_radio_button.click()
 
 time.sleep(10)
