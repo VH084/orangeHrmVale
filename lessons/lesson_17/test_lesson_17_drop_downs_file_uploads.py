@@ -20,8 +20,8 @@ def test_lesson_17_upload_file(app):
 
 def test_lesson_17_test_drag_and_drop(app):
     app.demonstrationAppDemoQa.openUrl()
-    # go to "Interactions" "Dragabble" section
-    # drag and drop the element to any position from the default from the page
+    app.demonstrationAppDemoQa.go_to_side_menu_section('Interactions', 'Draggable')
+    app.demonstrationAppDemoQa.drag_element()
 
 def test_lesson_17_test_drop_down_select(app):
     app.demonstrationAppDemoQa.openUrl()

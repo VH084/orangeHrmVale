@@ -15,6 +15,11 @@ class DemonstrationAppDemoQa:
     old_style_drop_down = '#oldSelectMenu'
     file_upload_input = '#uploadFile'
 
+    drag_simple = '#draggableExample-tabpane-simple'
+    select_one_dropdown = '#selectOne'
+    click_on_status = 'div[class*="menu"] div[id^="react-select"][class*="option"]'
+
+
     def __init__(self, app):
         self.app = app
         self.step: StepHelper = self.app.step
@@ -50,3 +55,12 @@ class DemonstrationAppDemoQa:
         self.step.scroll_element_into_center(self.file_upload_input)
         file_input = self.wd.find_element(By.CSS_SELECTOR, self.file_upload_input)
         file_input.send_keys(file_path)
+
+    def drag_element(self):
+        source_drag = self.step.wait_for_element(self.drag_simple)
+        self.step.scroll_element_into_center(self.draggable)
+        ActionChains(self.wd).drag_element(source_drag).perform()
+
+
+
+
